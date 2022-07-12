@@ -21,7 +21,9 @@ const Logger: FC<LoggerProps> = ({ callback }) => (
       multiline
       margin="dense"
     />
-    <Button onClick={callback}>Submit</Button>
+    <Button onClick={callback} variant="contained">
+      Submit
+    </Button>
   </Box>
 );
 
