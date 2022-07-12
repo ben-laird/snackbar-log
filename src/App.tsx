@@ -7,7 +7,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { FC, useState } from "react";
-import Logger from "./components/Logger";
+import Logger, { LoggerProps } from "./components/Logger";
 import Mode from "./components/Mode";
 import Title from "./components/Title";
 
@@ -20,6 +20,11 @@ const chooseTheme = (lightMode: boolean) =>
 const App: FC = () => {
   const lightModeState = useState(false);
 
+  const handleSubmit: LoggerProps["handleSubmit"] = (message) => (event) => {
+    event.preventDefault();
+    console.log(`Button clicked! Value: ${message}`);
+  };
+
   return (
     <ThemeProvider theme={chooseTheme(lightModeState[0])}>
       <CssBaseline />
@@ -29,7 +34,7 @@ const App: FC = () => {
           description="Simple console viewer for the browser"
         />
         <Mode lightModeState={lightModeState} />
-        <Logger callback={() => console.log("Button clicked!")} />
+        <Logger handleSubmit={handleSubmit} />
       </Paper>
     </ThemeProvider>
   );

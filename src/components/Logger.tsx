@@ -1,30 +1,42 @@
 import { Box, Button, TextField } from "@mui/material";
-import { FC } from "react";
+import React from "react";
+import { FC, useState } from "react";
 
-interface LoggerProps {
-  callback: () => void;
+export interface LoggerProps {
+  handleSubmit: (message: string) => React.FormEventHandler<HTMLFormElement>;
 }
 
-const Logger: FC<LoggerProps> = ({ callback }) => (
-  <Box
-    component="form"
-    padding={2}
-    noValidate
-    autoComplete="off"
-    onSubmit={callback}
-  >
-    <TextField
-      label="Text to Log"
-      helperText="Log some text to the Snackbar Console"
-      variant="outlined"
-      fullWidth
-      multiline
-      margin="dense"
-    />
-    <Button onClick={callback} variant="contained">
-      Submit
-    </Button>
-  </Box>
-);
+const Logger: FC<LoggerProps> = ({ handleSubmit }) => {
+  const [message, setMessage] = useState("");
+
+  const handleInput: React.FormEventHandler<HTMLDivElement> = (event) => {
+    const target = event.target as HTMLInputElement;
+    setMessage(target.value);
+  };
+
+  return (
+    <Box
+      component="form"
+      padding={2}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit(message)}
+    >
+      <TextField
+        label="Text to Log"
+        helperText="Log some text to the Snackbar Console"
+        variant="outlined"
+        fullWidth
+        multiline
+        margin="dense"
+        value={message}
+        onInput={handleInput}
+      />
+      <Button variant="contained" type="submit">
+        Submit
+      </Button>
+    </Box>
+  );
+};
 
 export default Logger;
