@@ -45,4 +45,4 @@ export default styled(Switch)(({ theme }) => ({
       backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
       borderRadius: 20 / 2,
     },
-  }));
+  })) as typeof Switch;
