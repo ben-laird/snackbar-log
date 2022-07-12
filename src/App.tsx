@@ -6,8 +6,9 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 import { FC, useState } from "react";
-import Logger, { LoggerProps } from "./components/Logger";
+import Logger from "./components/Logger";
 import Mode from "./components/Mode";
 import Title from "./components/Title";
 
@@ -20,22 +21,19 @@ const chooseTheme = (lightMode: boolean) =>
 const App: FC = () => {
   const lightModeState = useState(false);
 
-  const handleSubmit: LoggerProps["handleSubmit"] = (message) => (event) => {
-    event.preventDefault();
-    console.log(`Button clicked! Value: ${message}`);
-  };
-
   return (
     <ThemeProvider theme={chooseTheme(lightModeState[0])}>
-      <CssBaseline />
-      <Paper elevation={1} sx={{ margin: 3 }}>
-        <Title
-          title="Snackbar.log"
-          description="Simple console viewer for the browser"
-        />
-        <Mode lightModeState={lightModeState} />
-        <Logger handleSubmit={handleSubmit} />
-      </Paper>
+      <SnackbarProvider maxSnack={3}>
+        <CssBaseline />
+        <Paper elevation={1} sx={{ margin: 3 }}>
+          <Title
+            title="Snackbar.log"
+            description="Simple console viewer for the browser"
+          />
+          <Mode lightModeState={lightModeState} />
+          <Logger />
+        </Paper>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };
