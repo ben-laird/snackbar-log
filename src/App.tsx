@@ -1,14 +1,21 @@
-import { createTheme, CssBaseline, Paper, ThemeProvider } from "@mui/material";
+import {
+  createTheme,
+  CssBaseline,
+  PaletteMode,
+  Paper,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material";
 import { FC, useState } from "react";
 import Logger from "./components/Logger";
 import Mode from "./components/Mode";
 import Title from "./components/Title";
 
-const lightTheme = createTheme({ palette: { mode: "light" } });
-const darkTheme = createTheme({ palette: { mode: "dark" } });
+const makeTheme = (mode: PaletteMode) =>
+  responsiveFontSizes(createTheme({ palette: { mode } }));
 
 const chooseTheme = (lightMode: boolean) =>
-  lightMode ? lightTheme : darkTheme;
+  makeTheme(lightMode ? "light" : "dark");
 
 const App: FC = () => {
   const lightModeState = useState(false);
