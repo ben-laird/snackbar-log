@@ -18,11 +18,7 @@ More screenshots can be found in the resources folder.
 Clone or fork the project!
 
 ```bash
-git clone
-```
-
-```bash
-git fork
+git repo clone ben-laird/snackbar-log
 ```
 
 At the root of the project, open a terminal and install the relevant packages:
